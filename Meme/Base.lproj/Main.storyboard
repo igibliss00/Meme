@@ -15,47 +15,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAY-xG-ESf">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="pAY-xG-ESf">
                                 <rect key="frame" x="0.0" y="847" width="414" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <barButtonItem title="Pick" id="kjP-NK-exk">
+                                    <barButtonItem title="Camera" image="camera" catalog="system" id="754-QI-cNe">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <action selector="pickAnItem:" destination="BYZ-38-t0r" id="4fL-Pp-Pkb"/>
+                                            <action selector="camera:" destination="BYZ-38-t0r" id="CAN-ye-r8D"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Pick" image="photo.on.rectangle" catalog="system" id="kjP-NK-exk">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="pickFromPhotoLibrary:" destination="BYZ-38-t0r" id="7nj-Xr-NuJ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Item" image="square.and.arrow.up" catalog="system" id="ivU-YY-IuD">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="shareButton:" destination="BYZ-38-t0r" id="qkb-90-iAq"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="cancel" image="x.circle" catalog="system" id="tI0-62-Pc3">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="cancelButtonPressed:" destination="BYZ-38-t0r" id="uro-mE-hfW"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
+                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gbJ-XI-L8c">
                                 <rect key="frame" x="0.0" y="44" width="414" height="803"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BOTTOM" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-1T-7ZQ">
-                                <rect key="frame" x="26" y="751" width="362" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BOTTOM" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-1T-7ZQ">
+                                <rect key="frame" x="26" y="783" width="362" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TOP" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1JD-d3-Igm">
-                                <rect key="frame" x="26" y="76" width="362" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TOP" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1JD-d3-Igm">
+                                <rect key="frame" x="26" y="74" width="362" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gbJ-XI-L8c" secondAttribute="trailing" id="0dU-8F-8sg"/>
+                            <constraint firstItem="5wb-1T-7ZQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="26" id="17b-sQ-Dw9"/>
                             <constraint firstAttribute="bottom" secondItem="pAY-xG-ESf" secondAttribute="bottom" id="DOp-u4-YaR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5wb-1T-7ZQ" secondAttribute="trailing" constant="26" id="F4J-rY-pcH"/>
+                            <constraint firstItem="pAY-xG-ESf" firstAttribute="top" secondItem="5wb-1T-7ZQ" secondAttribute="bottom" constant="30" id="ISl-LY-IfD"/>
                             <constraint firstItem="pAY-xG-ESf" firstAttribute="top" secondItem="gbJ-XI-L8c" secondAttribute="bottom" id="Qkc-9e-xCg"/>
+                            <constraint firstItem="1JD-d3-Igm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="26" id="e0V-Wr-aVh"/>
                             <constraint firstItem="gbJ-XI-L8c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nNV-aq-UM4"/>
                             <constraint firstItem="pAY-xG-ESf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="p9i-A0-RUA"/>
                             <constraint firstItem="gbJ-XI-L8c" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="pUY-cf-cuA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1JD-d3-Igm" secondAttribute="trailing" constant="26" id="wYU-k9-CMP"/>
+                            <constraint firstItem="1JD-d3-Igm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="yfV-9e-o4J"/>
                             <constraint firstItem="pAY-xG-ESf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ysR-1b-3sW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="bottomTextField" destination="5wb-1T-7ZQ" id="XAZ-hc-D9d"/>
+                        <outlet property="cameraButton" destination="754-QI-cNe" id="1kZ-Am-Cs8"/>
                         <outlet property="imageView" destination="gbJ-XI-L8c" id="pdU-Ku-91Q"/>
+                        <outlet property="shareButton" destination="ivU-YY-IuD" id="dfv-XL-3Qr"/>
+                        <outlet property="toolBar" destination="pAY-xG-ESf" id="MJf-WN-0Pb"/>
                         <outlet property="topTextField" destination="1JD-d3-Igm" id="in2-97-npX"/>
                     </connections>
                 </viewController>
@@ -64,4 +95,10 @@
             <point key="canvasLocation" x="-86" y="106"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" catalog="system" width="128" height="96"/>
+        <image name="photo.on.rectangle" catalog="system" width="128" height="98"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="x.circle" catalog="system" width="128" height="121"/>
+    </resources>
 </document>
