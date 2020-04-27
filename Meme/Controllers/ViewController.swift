@@ -28,7 +28,6 @@ class ViewController: UIViewController,  UITextFieldDelegate,  UIImagePickerCont
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         topTextField.textAlignment = .center
         topTextField.defaultTextAttributes = memeTextAttributes
@@ -37,51 +36,40 @@ class ViewController: UIViewController,  UITextFieldDelegate,  UIImagePickerCont
         bottomTextField.defaultTextAttributes = memeTextAttributes
         shareButtonEnabled(isEnabled: false)
         bottomTextField.text = "BOTTOM"
-        
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
-        
     }
     
     
     //MARK: - Image picker
     
     func pickImage(source: UIImagePickerController.SourceType){
-        
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = source
         present(imagePicker, animated: true, completion: nil)
-        
     }
     
     @IBAction func camera(_ sender: Any) {
-        
         pickImage(source: UIImagePickerController.SourceType.camera)
     }
     
     @IBAction func pickFromPhotoLibrary(_ sender: Any) {
-        
         pickImage(source: UIImagePickerController.SourceType.photoLibrary)
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -106,7 +94,9 @@ class ViewController: UIViewController,  UITextFieldDelegate,  UIImagePickerCont
     
     @objc func keyboardWillShow(_ notification:Notification) {
         
-        view.frame.origin.y -= getKeyboardHeight(notification)
+        if view.frame.origin.y == 0 && !self.topTextField.isEditing {
+            view.frame.origin.y = getKeyboardHeight(notification) * (-1)
+        }
     }
     
     @objc func keyboardWillHide(_ notification:Notification) {
@@ -138,30 +128,31 @@ class ViewController: UIViewController,  UITextFieldDelegate,  UIImagePickerCont
     //MARK: - generate meme, save, and share
     func generateMemedImage() -> UIImage {
         
-        toolBarVisible(isVisible: false)
+        //        toolBarVisible(isVisible: false)
         
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        toolBarVisible(isVisible: true)
+        //        toolBarVisible(isVisible: true)
         
         return memedImage
     }
     
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
-                
+        
         if let topText = topTextField.text, let bottomText = bottomTextField.text {
-            
             let memedImage = generateMemedImage()
             let finishedMeme = Meme(topText: topText, bottomText: bottomText, originalImage: imageView.image!, memedImage: memedImage)
             let ac = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
             present(ac, animated: true, completion: nil)
             ac.completionWithItemsHandler = { activity, success, items, error in
                 if success {
-                    (UIApplication.shared.delegate as! AppDelegate).memes.append(finishedMeme)
-                    return
+                    let object = UIApplication.shared.delegate
+                    let appDelegate = object as! AppDelegate
+                    appDelegate.memes.append(finishedMeme)
+                    self.navigationController?.popToRootViewController(animated: true)
                 } else {
                     print("cancel")
                 }
@@ -169,17 +160,13 @@ class ViewController: UIViewController,  UITextFieldDelegate,  UIImagePickerCont
                     print("error while sharing: \(shareError.localizedDescription)")
                 }
             }
-            
-            
-            
         }
-        
     }
     
     //MARK: - show/hide the toolbar
     
     func toolBarVisible(isVisible: Bool) {
-        if isVisible {
+        if isVisible == true {
             toolBar.isHidden = false
         } else {
             toolBar.isHidden = true
@@ -205,6 +192,10 @@ class ViewController: UIViewController,  UITextFieldDelegate,  UIImagePickerCont
         imageView.image = nil
         shareButtonEnabled(isEnabled: false)
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
